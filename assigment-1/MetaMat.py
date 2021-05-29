@@ -44,17 +44,24 @@ class MetaMat:
             [self.__List],
             columns=self.create_idx(self.__NMatrix.size))
 
-
     def create_idx(self, len):
         return ["C" + str(number) for number in range(len)]
+
+    def __repr__(self) -> str:
+        return "List:\n" \
+            + repr(self.__List) \
+            + "\n\nPandas frame:\n" \
+            + repr(self.__PFrame) \
+            + "\n\nNumpy matrix:\n" \
+            + repr(self.__NMatrix)
 
     def __eq__(self, other):
         if self.__List != other.__List:
             return False
 
-        diff =  self.__NMatrix == other.__NMatrix
+        diff = self.__NMatrix == other.__NMatrix
         if not diff.all():
-            return False    
+            return False
 
         if not self.__PFrame.equals(other.__PFrame):
             return False
@@ -75,6 +82,7 @@ class TestMetaMat(unittest.TestCase):
 
     def testUpdateFromPandas(self):
         meta1 = MetaMat([1, 2, 3])
+        print(meta1)
         meta1.changeNElement(1, 0, 1)
 
         meta2 = MetaMat([1, 2, 1])
@@ -84,7 +92,6 @@ class TestMetaMat(unittest.TestCase):
 
     def testUpdateFromList(self):
         pass
-
 
 
 """
